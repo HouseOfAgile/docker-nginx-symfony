@@ -1,2 +1,2 @@
 # docker-nginx-symfony
-Docker + nginx + php-fpm + bash-profile + composer for symfony projects
+Docker + nginx + php-fpm + bash-profile + symfony manager + composer for symfony projects
