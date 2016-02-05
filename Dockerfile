@@ -1,6 +1,7 @@
-FROM HouseOfAgile/docker-nginx-php-fpm:latest
+FROM houseofagile/docker-nginx-php-fpm:latest
 
 MAINTAINER Meillaud Jean-Christophe (jc.meillaud@gmail.com)
+ENV HOME /root
 
 #Node install
 RUN add-apt-repository ppa:chris-lea/node.js
