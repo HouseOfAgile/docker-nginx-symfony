@@ -19,6 +19,7 @@ RUN chown www-data -R /usr/share/nginx/
 RUN apt-get clean && rm -rf /tmp/* /var/tmp/*
 
 ADD ./config/sm-config /root/.symfony-manager/sm-config
+ADD .bowerrc /root/.bowerrc
 
 RUN mkdir -p /root/docker-config
 ADD ./default-symfony-nginx.conf /root/docker-config/default-symfony-nginx.conf
