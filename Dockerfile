@@ -25,7 +25,5 @@ ADD ./default-symfony-nginx.conf /root/docker-config/default-symfony-nginx.conf
 
 RUN mkdir -p /etc/my_init.d
 ADD setup-projects.sh /etc/my_init.d/setup-projects.sh
-
 EXPOSE 80
-
 CMD ["/sbin/my_init"]
