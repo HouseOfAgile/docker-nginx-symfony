@@ -1,2 +1,7 @@
 private/*
+config/sm-config/sm-config*
+config/ssh-keys/*
+!config/ssh-keys/.gitkeep
+config/projects/*
+!config/projects/.gitkeep
 .idea
