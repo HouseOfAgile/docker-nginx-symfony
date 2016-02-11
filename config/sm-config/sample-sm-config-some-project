@@ -1,0 +1,17 @@
+application_install_path="/usr/share/nginx/some-project"
+application_install_env="dev"
+application_host="www.someproject.org"
+application_projectname="some-project"
+
+application_scmurl="git@someserver.com:some-project"
+#might be simply the path
+application_scmversion="master"
+application_scmtool="git"
+
+application_install_user=$USER
+application_deployment_user="www-data"
+
+application_bundles=( "AppBundle" )
+application_behat=( "AppBundle" )
+
+application_symfony_version=2
