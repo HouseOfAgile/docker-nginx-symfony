@@ -13,4 +13,9 @@ do
 	project_name=${file/sm-config-}
 #	$SM_CONF_DIR/symfony_manager.sh -l $SM_CONF_DIR/sm-config/$file -fi
 	mkdir -p $application_install_path
+	(
+	cd $application_install_path
+	git clone $application_scmurl
+	$SM_CONF_DIR/symfony_manager.sh -l $SM_CONF_DIR/sm-config/$file -fi
+	)
 done

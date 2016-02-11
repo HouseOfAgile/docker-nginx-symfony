@@ -1,3 +1,5 @@
 private/*
-config/*
+config/projects/*
+config/ssh-keys/*
+config/sm-config/*
 .idea
