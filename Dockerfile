@@ -11,8 +11,11 @@ RUN npm install less -g && npm install -g bower
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/
 RUN mv /usr/bin/composer.phar /usr/bin/composer
 
-RUN mkdir /root/projects
+RUN mkdir /root/projects && mkdir /root/ssh-keys
 ADD ./config/projects /root/projects
+ADD ./config/ssh-keys /root/ssh-keys
+RUN echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
+
 RUN chown www-data -R /usr/share/nginx/
 
 RUN apt-get clean && rm -rf /tmp/* /var/tmp/*
@@ -22,6 +25,7 @@ ADD .bowerrc /root/.bowerrc
 
 RUN mkdir -p /root/docker-config
 ADD ./default-symfony-nginx.conf /root/docker-config/default-symfony-nginx.conf
+RUN rm /etc/nginx/sites-enabled/default
 
 RUN mkdir -p /etc/my_init.d
 ADD setup-projects.sh /etc/my_init.d/10_setup-projects.sh
