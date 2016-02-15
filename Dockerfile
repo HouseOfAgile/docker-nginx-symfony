@@ -16,18 +16,17 @@ ADD ./config/projects /root/projects
 ADD ./config/ssh-keys /root/ssh-keys
 RUN echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
 
-RUN chown www-data -R /usr/share/nginx/
-
 RUN apt-get clean && rm -rf /tmp/* /var/tmp/*
 
 ADD ./config/sm-config /root/.symfony-manager/sm-config
 ADD .bowerrc /root/.bowerrc
 
-RUN mkdir -p /root/docker-config
+RUN chown www-data -R /usr/share/nginx/ && \
+mkdir -p /root/docker-config && \
+rm /etc/nginx/sites-enabled/default && \
+mkdir -p /etc/my_init.d
 ADD ./default-symfony-nginx.conf /root/docker-config/default-symfony-nginx.conf
-RUN rm /etc/nginx/sites-enabled/default
 
-RUN mkdir -p /etc/my_init.d
 ADD setup-projects.sh /etc/my_init.d/10_setup-projects.sh
 
 EXPOSE 80
