@@ -28,6 +28,13 @@ Just "inherit" from this image and copy your own files in the correct directorie
     EXPOSE 80
     CMD ["/sbin/my_init"]
 
+Build your image with your project name 
+
+    docker build -t "houseofagile/my-symfony-project:v1" .
+
+## Use it behind [jwilder proxy](https://github.com/jwilder/nginx-proxy) and [jrcs letsencrypt companion](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion)
+
+    PROJECT_NAME=your-project DOMAIN_NAMES="www.awesomedomain.com,amazingotherdomain.xyz" && docker run -e VIRTUAL_HOST="$DOMAIN_NAMES" -e LETSENCRYPT_HOST="$DOMAIN_NAMES" -e LETSENCRYPT_EMAIL="jc@houseofagile.com" -h $PROJECT_NAME --name $PROJECT_NAME -d -P houseofagile/my-symfony-project:v1
 
 
 
