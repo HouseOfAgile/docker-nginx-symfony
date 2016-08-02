@@ -1,22 +1,20 @@
-FROM houseofagile/docker-nginx-php-fpm:latest
+FROM houseofagile/docker-nginx-php-fpm:php7
 
 MAINTAINER Meillaud Jean-Christophe (jc@houseofagile.com)
 
 #Node install
 RUN add-apt-repository ppa:chris-lea/node.js
 RUN apt-get update \
- && apt-get install -y nodejs
-RUN npm install less -g && npm install -g bower
+ && apt-get install -y nodejs \
+ && npm install less -g && npm install -g bower \
+ && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ \
+ && mv /usr/bin/composer.phar /usr/bin/composer \
+ && mkdir /root/projects && mkdir /root/ssh-keys \
+ && echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config \
+ && apt-get clean && rm -rf /tmp/* /var/tmp/*
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/
-RUN mv /usr/bin/composer.phar /usr/bin/composer
-
-RUN mkdir /root/projects && mkdir /root/ssh-keys
 ADD ./config/projects /root/projects
 ADD ./config/ssh-keys /root/ssh-keys
-RUN echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
-
-RUN apt-get clean && rm -rf /tmp/* /var/tmp/*
 
 ADD ./config/sm-config /root/.symfony-manager/sm-config
 ADD .bowerrc /root/.bowerrc
