@@ -36,5 +36,6 @@ Build your image with your project name
 
     PROJECT_NAME=your-project DOMAIN_NAMES="www.awesomedomain.com,amazingotherdomain.xyz" && docker run -e VIRTUAL_HOST="$DOMAIN_NAMES" -e LETSENCRYPT_HOST="$DOMAIN_NAMES" -e LETSENCRYPT_EMAIL="jc@houseofagile.com" -h $PROJECT_NAME --name $PROJECT_NAME -d -P houseofagile/my-symfony-project:v1
 
+See [docker-nginx-php-fpm base docker](https://github.com/HouseOfAgile/docker-nginx-php-fpm) for more details.
 
 
