@@ -4,9 +4,9 @@ MAINTAINER Meillaud Jean-Christophe (jc@houseofagile.com)
 
 #Node install
 RUN add-apt-repository ppa:chris-lea/node.js
-RUN apt-get update \
- && apt-get install -y nodejs
-RUN npm install less -g && npm install -g bower
+RUN apt-get update && \
+ apt-get install -y nodejs npm && \
+ npm install less -g && npm install -g bower
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/
 RUN mv /usr/bin/composer.phar /usr/bin/composer
