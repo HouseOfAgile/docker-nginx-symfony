@@ -3,17 +3,18 @@ FROM houseofagile/docker-nginx-php-fpm:latest
 MAINTAINER Meillaud Jean-Christophe (jc@houseofagile.com)
 
 #Node install
-RUN apt-get update && \
- apt-get install -y nodejs npm && \
- npm install less -g && npm install -g bower
+RUN apt-get update \
+ && apt-get install -y nodejs npm \
+ && npm install less -g && npm install -g bower \
+ && curl -sS https://getcomposer.org/installer | php -- --version=1.3.2 --install-dir=/usr/bin/ \
+ && mv /usr/bin/composer.phar /usr/bin/composer \
+ && mkdir /root/projects && mkdir /root/ssh-keys \
+ && echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config \
+ && apt-get clean && rm -rf /tmp/* /var/tmp/*
 
-RUN curl -sS https://getcomposer.org/installer | php -- --version=1.3.2 --install-dir=/usr/bin/
-RUN mv /usr/bin/composer.phar /usr/bin/composer
-
-RUN mkdir /root/projects && mkdir /root/ssh-keys
 ADD ./config/projects /root/projects
 ADD ./config/ssh-keys /root/ssh-keys
-RUN echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
+
 
 RUN apt-get clean && rm -rf /tmp/* /var/tmp/*
 
