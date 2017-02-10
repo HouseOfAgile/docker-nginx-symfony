@@ -1,4 +1,4 @@
-FROM houseofagile/docker-nginx-php-fpm:latest
+FROM houseofagile/docker-nginx-php-fpm:php7
 
 MAINTAINER Meillaud Jean-Christophe (jc@houseofagile.com)
 
