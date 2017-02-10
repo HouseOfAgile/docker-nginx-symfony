@@ -7,7 +7,7 @@ RUN apt-get update && \
  apt-get install -y nodejs npm && \
  npm install less -g && npm install -g bower
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/
+RUN curl -sS https://getcomposer.org/installer | php -- --version=1.3.2 --install-dir=/usr/bin/
 RUN mv /usr/bin/composer.phar /usr/bin/composer
 
 RUN mkdir /root/projects && mkdir /root/ssh-keys
