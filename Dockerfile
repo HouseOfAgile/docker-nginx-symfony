@@ -15,9 +15,6 @@ RUN apt-get update \
 ADD ./config/projects /root/projects
 ADD ./config/ssh-keys /root/ssh-keys
 
-
-RUN apt-get clean && rm -rf /tmp/* /var/tmp/*
-
 ADD ./config/sm-config /root/.symfony-manager/sm-config
 ADD .bowerrc /root/.bowerrc
 
@@ -28,6 +25,7 @@ mkdir -p /etc/my_init.d
 ADD ./default-symfony-nginx.conf /root/docker-config/default-symfony-nginx.conf
 
 ADD setup-projects.sh /etc/my_init.d/10_setup-projects.sh
+RUN chmod +x /etc/my_init.d/10_setup-projects.sh
 
 EXPOSE 80
 CMD ["/sbin/my_init"]
