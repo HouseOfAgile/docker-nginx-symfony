@@ -1,4 +1,4 @@
-FROM houseofagile/docker-nginx-php-fpm:php7
+FROM houseofagile/docker-nginx-php-fpm:php5
 
 MAINTAINER Meillaud Jean-Christophe (jc@houseofagile.com)
 
@@ -17,12 +17,14 @@ ADD ./config/ssh-keys /root/ssh-keys
 
 ADD ./config/sm-config /root/.symfony-manager/sm-config
 ADD .bowerrc /root/.bowerrc
+ADD ./default-symfony-nginx.conf /root/docker-config/default-symfony-nginx.conf
 
 RUN chown www-data -R /usr/share/nginx/ && \
 mkdir -p /root/docker-config && \
 rm /etc/nginx/sites-enabled/default && \
-mkdir -p /etc/my_init.d
-ADD ./default-symfony-nginx.conf /root/docker-config/default-symfony-nginx.conf
+mkdir -p /etc/my_init.d && \
+sed -i 's#%%php_fpm_sock_file%%#/var/run/php/php5.6-fpm.sock#g' /root/docker-config/default-symfony-nginx.conf
+
 
 ADD setup-projects.sh /etc/my_init.d/10_setup-projects.sh
 RUN chmod +x /etc/my_init.d/10_setup-projects.sh
